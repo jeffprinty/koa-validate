@@ -1,26 +1,30 @@
-'use strict';
+const Koa = require('koa');
+const body = require('koa-body');
+const Router = require('koa-router');
 
-var koa = require('koa');
-
-exports.create = function(type) {
-	var app = koa();
-	require('../validate.js')(app);
-	var router = require('koa-router')();
-	if(1 == type) {
-		app.use(require('koa-body')({multipart:true , formidable:{keepExtensions:true}}));
-	}else {
-		app.use(require('koa-body')())
+exports.create = type => {
+	const app = new Koa();
+	const router = new Router();
+	require('../')(app);
+	if (1 == type) {
+		app.use(
+			body({
+				multipart: true,
+				formidable: { keepExtensions: true }
+			})
+		);
+	} else {
+		app.use(body());
 	}
-	app.use(function*(next){
+	app.use(async (ctx, next) => {
 		try {
-			yield next;
-		}catch(err) {
-			console.log(err.stack)
-			this.app.emit('error', err, this);
+			await next();
+		} catch (err) {
+			console.log(err.stack);
+			ctx.app.emit('error', err, ctx);
 		}
-	})
-	app.use(router.routes())
-  	.use(router.allowedMethods());
-  	app.router = router;
+	});
+	app.use(router.routes()).use(router.allowedMethods());
+	app.router = router;
 	return app;
-}
+};

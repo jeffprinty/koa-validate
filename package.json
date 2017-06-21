@@ -1,12 +1,12 @@
 {
   "name": "koa-validate",
   "version": "1.0.7",
-  "description": "A koa params validate middleware.",
-  "main": "validate.js",
+  "description": "A koa params validator middleware.",
+  "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --harmony --require should --reporter spec",
-    "test-cov": "NODE_ENV=test node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --require should",
-    "test-travis": "NODE_ENV=test node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --require should"
+    "test": "NODE_ENV=test mocha  --reporter spec",
+    "test-cov": "NODE_ENV=test node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --require should",
+    "test-travis": "NODE_ENV=test node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --require should"
   },
   "repository": {
     "type": "git",
@@ -24,20 +24,21 @@
   "license": "MIT",
   "dependencies": {
     "json-path": "^0.1.3",
-    "validator": "^5.2.0"
+    "validator": "7.0.0"
   },
   "devDependencies": {
-    "koa": "*",
-    "koa-router": "*",
-    "koa-body": "*",
-    "should": "*",
-    "mocha": "*",
-    "supertest": "^0.13.0",
-    "coveralls": "*",
-    "mocha-lcov-reporter": "*",
-    "istanbul-harmony": "0"
+    "coveralls": "2.13.1",
+    "istanbul-harmony": "0",
+    "koa": "2.3.0",
+    "koa-body": "2.1.0",
+    "koa-router": "7.2.1",
+    "lodash.isdate": "4.0.1",
+    "mocha": "3.4.2",
+    "mocha-lcov-reporter": "1.3.0",
+    "should": "11.2.1",
+    "supertest": "3.0.0"
   },
   "engines": {
-    "node": ">= 0.11.9"
+    "node": ">=7.6"
   }
 }
